@@ -1,5 +1,6 @@
 package io.github.pulsebeat02.ffmpeginstaller;
 
+import static io.github.pulsebeat02.ffmpeginstaller.OS.FREEBSD;
 import static io.github.pulsebeat02.ffmpeginstaller.OS.LINUX;
 import static io.github.pulsebeat02.ffmpeginstaller.OS.MAC;
 import static io.github.pulsebeat02.ffmpeginstaller.OS.WINDOWS;
@@ -36,6 +37,8 @@ public final class FFmpegInstaller {
             "https://github.com/eugeneware/ffmpeg-static/releases/download/b4.4/darwin-x64")
         .put(WINDOWS, false,
             "https://github.com/eugeneware/ffmpeg-static/releases/download/b4.4/win32-x64")
+        .put(FREEBSD, false,
+            "https://github.com/eugeneware/ffmpeg-static/releases/download/b4.4/freebsd-x64")
         .build();
     BITS_32 = ImmutableTable.<OS, Boolean, String>builder()
         .put(LINUX, true,
@@ -80,15 +83,40 @@ public final class FFmpegInstaller {
     }
   }
 
+  /**
+   * Constructs a new FFmpegInstaller with the specified directory for the executable.
+   *
+   * @param executable directory
+   * @return new FFmpegInstaller
+   */
   public static FFmpegInstaller create(final Path executable) {
     return new FFmpegInstaller(executable);
   }
 
+  /**
+   * Constructs a new FFmpegInstaller with the default directory for the executable.
+   * <p>
+   * For Windows, it is C:/Program Files/static-ffmpeg Otherwise, it is [user home
+   * directory]/static-ffmpeg
+   *
+   * @return
+   */
   public static FFmpegInstaller create() {
     return new FFmpegInstaller();
   }
 
-  public Path download() throws IOException {
+  /**
+   * Downloads the binary into the specified directory with the file name "ffmpeg". If the file
+   * already exists there, it will return the path of that file assuming that FFmpeg has already
+   * been installed. Otherwise, it downloads a new file. If chmod is set to true, it will change the
+   * file permissions to 777 you can use {@ProcessBuilder} or {@Process} to use the binary. It
+   * returns the path of the downloaded executable
+   *
+   * @param chmod whether chmod 777 should be applied (if not windows)
+   * @return the path of the download executable
+   * @throws IOException if an issue occurred during file creation, downloading, or renaming.
+   */
+  public Path download(final boolean chmod) throws IOException {
     if (Files.exists(this.path)) {
       return this.path;
     } else {
@@ -99,7 +127,9 @@ public final class FFmpegInstaller {
         final FileChannel channel = new FileOutputStream(this.path.toFile()).getChannel()) {
       channel.transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
     }
-    this.changePermissions();
+    if (chmod) {
+      this.changePermissions();
+    }
     this.renameFile();
     return this.path;
   }

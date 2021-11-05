@@ -9,6 +9,7 @@ import java.util.Set;
 enum OS {
 
   LINUX,
+  FREEBSD,
   MAC,
   WINDOWS;
 
@@ -35,9 +36,15 @@ enum OS {
       return LINUX;
     } else if (os.contains("mac")) {
       return MAC;
+    } else if (isFreeBsd(os)) {
+      return FREEBSD;
     } else {
       throw new AssertionError("Unsupported Operating System!");
     }
+  }
+
+  private static boolean isFreeBsd(final String os) {
+    return os.contains("freebsd");
   }
 
   private static boolean is64Bits0() {
