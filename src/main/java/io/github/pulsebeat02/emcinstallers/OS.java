@@ -1,4 +1,4 @@
-package io.github.pulsebeat02.ffmpeginstaller;
+package io.github.pulsebeat02.emcinstallers;
 
 import com.google.common.collect.ImmutableSet;
 import java.nio.file.Path;
@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.Set;
 
-enum OS {
+public enum OS {
 
   LINUX,
   FREEBSD,
@@ -62,9 +62,9 @@ enum OS {
     switch (CURRENT) {
       case LINUX:
       case MAC:
-        return Paths.get(System.getProperty("user.home"), "static-ffmpeg");
+        return Paths.get(System.getProperty("user.home"), "static-emc");
       case WINDOWS:
-        return Paths.get("C:/Program Files/static-ffmpeg");
+        return Paths.get("C:/Program Files/static-emc/");
       default:
         throw new AssertionError("Unsupported Operating System!");
     }

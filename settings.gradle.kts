@@ -1,2 +1,2 @@
-rootProject.name = "static-ffmpeg-installer"
+rootProject.name = "emc-installers"
 
