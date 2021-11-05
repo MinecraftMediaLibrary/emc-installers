@@ -8,7 +8,7 @@ import java.nio.file.Path;
 
 public final class FFmpegInstaller extends BaseInstaller {
 
-  private static final String VERSION;
+  public static final String VERSION;
   private static final Table<OS, Boolean, String> BITS_64;
   private static final Table<OS, Boolean, String> BITS_32;
 

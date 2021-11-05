@@ -21,7 +21,7 @@ public abstract class BaseInstaller implements Installer {
 
   private final Table<OS, Boolean, String> bits32;
   private final Table<OS, Boolean, String> bits64;
-  private String url;
+  private final String url;
   private Path path;
 
   public BaseInstaller(
@@ -116,13 +116,5 @@ public abstract class BaseInstaller implements Installer {
 
   public Path getPath() {
     return this.path;
-  }
-
-  public void setPath(final Path path) {
-    this.path = path;
-  }
-
-  public void setUrl(final String url) {
-    this.url = url;
   }
 }
