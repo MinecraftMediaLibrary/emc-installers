@@ -2,7 +2,7 @@
 
 Static EMC Installers is a lightweight library which downloads
 an assortment of static compiled executables to your respective 
-operating  system. It detects what type of operating system you are using
+operating system. It detects what type of operating system you are using
 and installs the proper binary.
 
 ## Setup
