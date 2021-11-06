@@ -59,15 +59,7 @@ public enum OS {
   }
 
   private static Path getPath0() {
-    switch (CURRENT) {
-      case LINUX:
-      case MAC:
-        return Paths.get(System.getProperty("user.home"), "static-emc");
-      case WINDOWS:
-        return Paths.get("C:/Program Files/static-emc/");
-      default:
-        throw new AssertionError("Unsupported Operating System!");
-    }
+    return Paths.get(System.getProperty("user.home"), "static-emc");
   }
 
   private static boolean isArm0() {
