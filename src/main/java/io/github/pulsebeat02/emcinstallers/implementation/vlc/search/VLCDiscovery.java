@@ -32,6 +32,7 @@ import static uk.co.caprica.vlcj.binding.LibVlc.libvlc_release;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Sets;
 import com.sun.jna.NativeLibrary;
 import com.sun.jna.StringArray;
 import io.github.pulsebeat02.emcinstallers.OS;
@@ -46,6 +47,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.AbstractMap.SimpleImmutableEntry;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
@@ -83,13 +85,13 @@ public final class VLCDiscovery {
     final Entry<DirectoryProvider, DiscoveryAlgorithm> entry = IMPLEMENTATION.get(
         getOperatingSystem());
     this.algorithm = entry.getValue();
-    this.provider = entry.getKey().getSearchDirectories();
+    this.provider = Sets.newHashSet(entry.getKey().getSearchDirectories());
     this.keyword = this.getBinaryName();
   }
 
   VLCDiscovery(final DirectoryProvider provider, final DiscoveryAlgorithm algorithm) {
     this.algorithm = algorithm;
-    this.provider = provider.getSearchDirectories();
+    this.provider = Sets.newHashSet(provider.getSearchDirectories());
     this.keyword = this.getBinaryName();
   }
 
