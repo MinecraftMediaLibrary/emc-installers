@@ -1,6 +1,7 @@
 plugins {
     java
     `java-library`
+    `maven-publish`
     id("com.github.hierynomus.license-base") version "0.16.1"
 }
 
@@ -39,6 +40,17 @@ tasks {
     java {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "io.github.pulsebeat02"
+            artifactId = "emc-installers"
+            version = "1.0.0"
+            from(components["java"])
+        }
     }
 }
 
