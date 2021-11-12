@@ -30,6 +30,7 @@ import io.github.pulsebeat02.emcinstallers.implementation.vlc.search.VLCDiscover
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Optional;
 
 public final class VLCInstallationKit {
 
@@ -49,21 +50,23 @@ public final class VLCInstallationKit {
    * not be found, it will download the respective binary for the user operating system and load
    * that libvlc that way.
    *
+   * @return Optional containing path if found, otherwise empty
+   *
    * @throws IOException if an issue occurred during installation
    */
-  public void start() throws IOException {
-    this.installBinary(true, this.others);
+  public Optional<Path> start() throws IOException {
+    return this.installBinary(true, this.others);
   }
 
-  private void installBinary(final boolean chmod, final Path... others) throws IOException {
-    this.searchAndLoadBinary(VLCInstaller.create().download(chmod), others);
+  private Optional<Path> installBinary(final boolean chmod, final Path... others) throws IOException {
+    return this.searchAndLoadBinary(VLCInstaller.create().download(chmod), others);
   }
 
-  private void searchAndLoadBinary(final Path binary, final Path... others) {
+  private Optional<Path> searchAndLoadBinary(final Path binary, final Path... others) {
     final VLCDiscovery discovery = VLCDiscovery.create();
     discovery.addSearchPath(binary);
     Arrays.stream(others).forEach(discovery::addSearchPath);
-    discovery.discover();
+    return discovery.discover();
   }
 
   /**
