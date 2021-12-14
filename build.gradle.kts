@@ -50,7 +50,7 @@ tasks {
 publishing {
     repositories {
         maven {
-            setUrl("https://pulsebeat02.jfrog.io/artifactory/pulse-gradle")
+            setUrl("https://pulsebeat02.jfrog.io/artifactory/pulse-gradle-release-local/")
             credentials {
                 username = ""
                 password = ""
