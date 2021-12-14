@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "io.github.pulsebeat02"
-version = "v1.0.1"
+version = "v1.1.0"
 
 repositories {
     mavenCentral()
