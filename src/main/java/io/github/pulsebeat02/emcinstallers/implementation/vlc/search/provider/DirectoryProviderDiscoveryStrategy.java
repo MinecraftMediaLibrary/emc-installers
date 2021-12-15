@@ -33,29 +33,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 public abstract class DirectoryProviderDiscoveryStrategy extends BaseNativeDiscoveryStrategy {
 
-  private static final Set<DiscoveryDirectoryProvider> DIRECTORY_PROVIDERS;
+  private static final List<DiscoveryDirectoryProvider> DIRECTORY_PROVIDERS;
 
   static {
-    DIRECTORY_PROVIDERS = new TreeSet<>((o1, o2) -> o2.priority() - o1.priority());
-    DIRECTORY_PROVIDERS.addAll(Arrays.asList(
-        new ConfigurationFileDiscoveryDirectoryProvider(),
-        new JnaLibraryPathDirectoryProvider(),
-        new LinuxWellKnownDirectoryProvider(),
-        new OsxWellKnownDirectoryProvider(),
-        new SystemPathDirectoryProvider(),
-        new UserDirDirectoryProvider(),
-        new WindowsInstallDirectoryProvider()
-    ));
+    DIRECTORY_PROVIDERS =
+        new ArrayList<>(
+            Arrays.asList(
+                new ConfigurationFileDiscoveryDirectoryProvider(),
+                new JnaLibraryPathDirectoryProvider(),
+                new LinuxWellKnownDirectoryProvider(),
+                new OsxWellKnownDirectoryProvider(),
+                new SystemPathDirectoryProvider(),
+                new UserDirDirectoryProvider(),
+                new WindowsInstallDirectoryProvider()));
+    DIRECTORY_PROVIDERS.sort((o1, o2) -> o2.priority() - o1.priority());
   }
 
-  private final Set<DiscoveryDirectoryProvider> directoryProviders;
+  private final List<DiscoveryDirectoryProvider> directoryProviders;
 
-  public DirectoryProviderDiscoveryStrategy(final String[] filenamePatterns,
-      final String[] pluginPathFormats) {
+  public DirectoryProviderDiscoveryStrategy(
+      final String[] filenamePatterns, final String[] pluginPathFormats) {
     super(filenamePatterns, pluginPathFormats);
     this.directoryProviders = DIRECTORY_PROVIDERS;
   }
@@ -85,5 +85,6 @@ public abstract class DirectoryProviderDiscoveryStrategy extends BaseNativeDisco
 
   public static void addSearchDirectory(final Path path) {
     DIRECTORY_PROVIDERS.add(new CustomWellKnownDirectoryProvider(path.toString()));
+    DIRECTORY_PROVIDERS.sort((o1, o2) -> o2.priority() - o1.priority());
   }
 }
