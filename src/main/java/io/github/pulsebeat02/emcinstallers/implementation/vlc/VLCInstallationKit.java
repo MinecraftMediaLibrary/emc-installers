@@ -31,6 +31,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Optional;
 
+/** VLC Installation manager. */
 public final class VLCInstallationKit {
 
   private final Path[] others;

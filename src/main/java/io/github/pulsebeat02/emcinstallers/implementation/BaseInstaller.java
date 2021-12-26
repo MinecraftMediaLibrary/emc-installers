@@ -1,25 +1,22 @@
 /**
  * MIT License
  *
- * Copyright (c) 2021 Brandon Li
+ * <p>Copyright (c) 2021 Brandon Li
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
+ * <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+ * and associated documentation files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge, publish, distribute,
+ * sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * <p>The above copyright notice and this permission notice shall be included in all copies or
+ * substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+ * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package io.github.pulsebeat02.emcinstallers.implementation;
 
@@ -40,6 +37,7 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/** Base installer of all installers. */
 public abstract class BaseInstaller implements Installer {
 
   private final Table<OS, Boolean, String> bits32;
@@ -47,6 +45,14 @@ public abstract class BaseInstaller implements Installer {
   private final String url;
   private Path path;
 
+  /**
+   * Creates a new BaseInstaller.
+   *
+   * @param folder the folder to target
+   * @param name the name
+   * @param bits32 installation links for 32-bit
+   * @param bits64 installation links for 64-bit
+   */
   public BaseInstaller(
       final Path folder,
       final String name,
@@ -62,7 +68,16 @@ public abstract class BaseInstaller implements Installer {
     this.createFiles();
   }
 
-  public BaseInstaller(final String name, final Table<OS, Boolean, String> bits32,
+  /**
+   * Creates a new BaseInstaller.
+   *
+   * @param name the name
+   * @param bits32 installation links for 32-bit
+   * @param bits64 installation links for 64-bit
+   */
+  public BaseInstaller(
+      final String name,
+      final Table<OS, Boolean, String> bits32,
       final Table<OS, Boolean, String> bits64) {
     this(getExecutablePath(), name, bits32, bits64);
   }
@@ -95,7 +110,7 @@ public abstract class BaseInstaller implements Installer {
       Files.createFile(this.path);
     }
     try (final ReadableByteChannel readableByteChannel =
-        Channels.newChannel(new URL(this.url).openStream());
+            Channels.newChannel(new URL(this.url).openStream());
         final FileChannel channel = new FileOutputStream(this.path.toFile()).getChannel()) {
       channel.transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
     }

@@ -17,16 +17,21 @@ import uk.co.caprica.vlcj.binding.RuntimeUtil;
 import uk.co.caprica.vlcj.binding.internal.libvlc_instance_t;
 import uk.co.caprica.vlcj.support.version.LibVlcVersion;
 
+/**
+ * Enhanced native discovery class for VLC. This class should not be touched by the user, and only
+ * be used for internal library purposes.
+ */
 public class EnhancedNativeDiscovery {
 
   private static final List<NativeDiscoveryStrategy> DEFAULT_STRATEGIES;
   private static boolean FOUND;
 
   static {
-    DEFAULT_STRATEGIES = Arrays.asList(
-        new LinuxNativeDiscoveryStrategy(),
-        new OsxNativeDiscoveryStrategy(),
-        new WindowsNativeDiscoveryStrategy());
+    DEFAULT_STRATEGIES =
+        Arrays.asList(
+            new LinuxNativeDiscoveryStrategy(),
+            new OsxNativeDiscoveryStrategy(),
+            new WindowsNativeDiscoveryStrategy());
   }
 
   private final List<NativeDiscoveryStrategy> discoveryStrategies;
@@ -38,6 +43,11 @@ public class EnhancedNativeDiscovery {
         discoveryStrategies.length > 0 ? Arrays.asList(discoveryStrategies) : DEFAULT_STRATEGIES;
   }
 
+  /**
+   * Attempts to discover VLC on the host environment.
+   *
+   * @return whether discovery was successful or not
+   */
   public final boolean discover() {
     if (FOUND) {
       return true;
@@ -57,8 +67,8 @@ public class EnhancedNativeDiscovery {
     }
   }
 
-  private boolean attemptLibraryLoad(final NativeDiscoveryStrategy discoveryStrategy,
-      final String path) {
+  private boolean attemptLibraryLoad(
+      final NativeDiscoveryStrategy discoveryStrategy, final String path) {
     if (this.tryLoadingLibrary()) {
       this.successfulStrategy = discoveryStrategy;
       this.discoveredPath = path;
