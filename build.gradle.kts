@@ -17,8 +17,8 @@ dependencies {
     testRuntimeOnly("com.google.guava:guava:31.0.1-jre")
     compileOnlyApi("uk.co.caprica:vlcj:4.7.1")
     testRuntimeOnly("uk.co.caprica:vlcj:4.7.1")
-    compileOnlyApi("uk.co.caprica:vlcj-natives:4.1.0")
-    testRuntimeOnly("uk.co.caprica:vlcj-natives:4.1.0")
+    compileOnlyApi("uk.co.caprica:vlcj-natives:4.5.0")
+    testRuntimeOnly("uk.co.caprica:vlcj-natives:4.5.0")
     compileOnlyApi("net.java.dev.jna:jna:5.10.0")
     testRuntimeOnly("net.java.dev.jna:jna:5.10.0")
     compileOnlyApi("net.java.dev.jna:jna-platform:5.10.0")
@@ -38,8 +38,8 @@ sourceSets {
 
 tasks {
     java {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     publish {
         dependsOn(clean)
