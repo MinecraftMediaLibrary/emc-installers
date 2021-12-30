@@ -6,45 +6,21 @@ operating system. It detects what type of operating system you are using
 and installs the proper binary.
 
 ## Setup
-1) Add Jitpack to your repositories:
+1) Add MinecraftMediaLibrary Repository:
 
-Maven:
-```xml
-<repository>
-  <id>jitpack.io</id>
-  <url>https://jitpack.io</url>
-</repository>
-```
-
-Gradle Groovy:
-```groovy
-maven { url 'https://jitpack.io' }
-```
-
-Gradle Kotlin DSL:
 ```kotlin
-maven("https://jitpack.io")
+repositories {
+    maven("https://pulsebeat02.jfrog.io/artifactory/minecraftmedialibrary/")
+}
 ```
 
 2) Add the repository into your project:
 
 Maven
-```xml
-<dependency>
-  <groupId>com.github.MinecraftMediaLibrary</groupId>
-  <artifactId>emc-installers</artifactId>
-  <version>master-SNAPSHOT</version>
-</dependency>
-```
-
-Gradle Groovy:
-```groovy
-implementation 'com.github.MinecraftMediaLibrary:emc-installers:master-SNAPSHOT'
-```
-
-Gradle Kotlin DSL:
 ```kotlin
-implementation("com.github.MinecraftMediaLibrary:emc-installers:master-SNAPSHOT")
+dependencies {
+    implementation("io.github.pulsebeat02:emc-installers:v1.1.0")
+}
 ```
 
 ## Usage
