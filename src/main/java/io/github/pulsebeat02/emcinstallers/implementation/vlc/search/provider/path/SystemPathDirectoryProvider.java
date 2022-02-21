@@ -19,6 +19,7 @@
 
 package io.github.pulsebeat02.emcinstallers.implementation.vlc.search.provider.path;
 
+import io.github.pulsebeat02.emcinstallers.OS;
 import io.github.pulsebeat02.emcinstallers.implementation.vlc.search.provider.DiscoveryDirectoryProvider;
 import io.github.pulsebeat02.emcinstallers.implementation.vlc.search.provider.DiscoveryProviderPriority;
 
@@ -31,8 +32,17 @@ public class SystemPathDirectoryProvider implements DiscoveryDirectoryProvider {
 
   @Override
   public String[] directories() {
+
     final String path = System.getenv("PATH");
-    return path != null ? path.split("/") : new String[0];
+    if (path == null) {
+      return new String[0];
+    }
+
+    if (OS.getOperatingSystem() == OS.WINDOWS) {
+      return path.split(";");
+    } else {
+      return path.split(":");
+    }
   }
 
   @Override

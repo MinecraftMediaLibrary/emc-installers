@@ -37,7 +37,7 @@ public class JnaLibraryPathDirectoryProvider implements DiscoveryDirectoryProvid
 
   @Override
   public String[] directories() {
-    return System.getProperty("jna.library.path").split("/");
+    return System.getProperty(SYSTEM_PROPERTY_NAME).split("/");
   }
 
   @Override
