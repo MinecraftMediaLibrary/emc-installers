@@ -19,8 +19,8 @@ dependencies {
     testRuntimeOnly("uk.co.caprica:vlcj:4.7.1")
     compileOnlyApi("uk.co.caprica:vlcj-natives:4.5.0")
     testRuntimeOnly("uk.co.caprica:vlcj-natives:4.5.0")
-    compileOnlyApi("net.java.dev.jna:jna:5.10.0")
-    testRuntimeOnly("net.java.dev.jna:jna:5.10.0")
+    compileOnlyApi("net.java.dev.jna:jna:5.11.0")
+    testRuntimeOnly("net.java.dev.jna:jna:5.11.0")
     compileOnlyApi("net.java.dev.jna:jna-platform:5.11.0")
     testRuntimeOnly("net.java.dev.jna:jna-platform:5.11.0")
 }
