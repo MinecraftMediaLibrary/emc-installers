@@ -15,8 +15,8 @@ repositories {
 dependencies {
     compileOnlyApi("com.google.guava:guava:31.1-jre")
     testRuntimeOnly("com.google.guava:guava:31.1-jre")
-    compileOnlyApi("uk.co.caprica:vlcj:4.7.2")
-    testRuntimeOnly("uk.co.caprica:vlcj:4.7.2")
+    compileOnlyApi("uk.co.caprica:vlcj:4.7.3")
+    testRuntimeOnly("uk.co.caprica:vlcj:4.7.3")
     compileOnlyApi("uk.co.caprica:vlcj-natives:4.5.0")
     testRuntimeOnly("uk.co.caprica:vlcj-natives:4.5.0")
     compileOnlyApi("net.java.dev.jna:jna:5.11.0")
