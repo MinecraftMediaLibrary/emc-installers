@@ -57,14 +57,18 @@ public class EnhancedNativeDiscovery {
           final Optional<String> optional = discoveryStrategy.discover();
           if (optional.isPresent()) {
             final String path = optional.get();
-            this.addLibvlc(discoveryStrategy, path);
-            this.tryPluginPath(path, discoveryStrategy);
-            return this.attemptLibraryLoad(discoveryStrategy, path);
+            return this.attemptPath(discoveryStrategy, path);
           }
         }
       }
       return false;
     }
+  }
+
+  private boolean attemptPath(final NativeDiscoveryStrategy discoveryStrategy, final String path) {
+    this.addLibvlc(discoveryStrategy, path);
+    this.tryPluginPath(path, discoveryStrategy);
+    return this.attemptLibraryLoad(discoveryStrategy, path);
   }
 
   private boolean attemptLibraryLoad(
@@ -95,15 +99,20 @@ public class EnhancedNativeDiscovery {
   private boolean tryLoadingLibrary() {
     try {
       final libvlc_instance_t instance = libvlc_new(0, new StringArray(new String[0]));
-      if (instance != null) {
-        libvlc_release(instance);
-        final LibVlcVersion version = new LibVlcVersion();
-        if (version.isSupported()) {
-          return true;
-        }
+      if (this.attemptNativeLibraryRelease(instance)) {
+        return true;
       }
     } catch (final UnsatisfiedLinkError e) {
       System.err.println(e.getMessage());
+    }
+    return false;
+  }
+
+  private boolean attemptNativeLibraryRelease(final libvlc_instance_t instance) {
+    if (instance != null) {
+      libvlc_release(instance);
+      final LibVlcVersion version = new LibVlcVersion();
+      return version.isSupported();
     }
     return false;
   }

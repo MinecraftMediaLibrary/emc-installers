@@ -38,16 +38,11 @@ public class SystemPathDirectoryProvider implements DiscoveryDirectoryProvider {
       return new String[0];
     }
 
-    if (OS.getOperatingSystem() == OS.WINDOWS) {
-      return path.split(";");
-    } else {
-      return path.split(":");
-    }
+    return OS.getOperatingSystem() == OS.WINDOWS ? path.split(";") : path.split(":");
   }
 
   @Override
   public boolean supported() {
     return true;
   }
-
 }

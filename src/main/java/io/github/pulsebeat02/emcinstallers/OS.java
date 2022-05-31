@@ -46,15 +46,9 @@ public enum OS {
 
   private static OS getOperatingSystem0() {
     final String os = System.getProperty("os.name").toLowerCase();
-    if (os.contains("win")) {
-      return WINDOWS;
-    } else if (os.contains("mac")) {
-      return MAC;
-    } else if (os.contains("freebsd")) {
-      return FREEBSD;
-    } else {
-      return LINUX;
-    }
+    return os.contains("win")
+        ? WINDOWS
+        : os.contains("mac") ? MAC : os.contains("freebsd") ? FREEBSD : LINUX;
   }
 
   private static boolean is64Bits0() {

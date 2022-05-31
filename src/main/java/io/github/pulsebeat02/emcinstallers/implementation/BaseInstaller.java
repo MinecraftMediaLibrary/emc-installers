@@ -94,31 +94,53 @@ public abstract class BaseInstaller implements Installer {
 
   private void createFiles() {
     if (Files.notExists(this.path)) {
-      try {
-        Files.createDirectories(this.path.getParent());
-      } catch (final IOException e) {
-        e.printStackTrace();
-      }
+      this.createParentDirectories();
+    }
+  }
+
+  private void createParentDirectories() {
+    try {
+      Files.createDirectories(this.path.getParent());
+    } catch (final IOException e) {
+      e.printStackTrace();
     }
   }
 
   @Override
   public Path download(final boolean chmod) throws IOException {
-    if (Files.exists(this.path)) {
+
+    if (this.checkExistingFile()) {
       return this.path;
-    } else {
-      Files.createFile(this.path);
     }
+
+    this.downloadFile();
+    this.changePermissions(chmod);
+    this.renameFile();
+
+    return this.path;
+  }
+
+  private void changePermissions(final boolean chmod) throws IOException {
+    if (chmod) {
+      this.changePermissions();
+    }
+  }
+
+  private void downloadFile() throws IOException {
     try (final ReadableByteChannel readableByteChannel =
             Channels.newChannel(new URL(this.url).openStream());
         final FileChannel channel = new FileOutputStream(this.path.toFile()).getChannel()) {
       channel.transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
     }
-    if (chmod) {
-      this.changePermissions();
+  }
+
+  private boolean checkExistingFile() throws IOException {
+    if (Files.exists(this.path)) {
+      return true;
+    } else {
+      Files.createFile(this.path);
     }
-    this.renameFile();
-    return this.path;
+    return false;
   }
 
   private void renameFile() throws IOException {
@@ -132,11 +154,15 @@ public abstract class BaseInstaller implements Installer {
   private void changePermissions() throws IOException {
     if (getOperatingSystem() != WINDOWS) {
       final ProcessBuilder builder = new ProcessBuilder("chmod", "777", this.path.toString());
-      try {
-        builder.start().waitFor();
-      } catch (final InterruptedException e) {
-        e.printStackTrace();
-      }
+      this.startProcess(builder);
+    }
+  }
+
+  private void startProcess(final ProcessBuilder builder) throws IOException {
+    try {
+      builder.start().waitFor();
+    } catch (final InterruptedException e) {
+      e.printStackTrace();
     }
   }
 

@@ -34,7 +34,7 @@ public final class FFmpegInstaller extends BaseInstaller {
   private static final Table<OS, Boolean, String> BITS_32;
 
   static {
-    VERSION = "b4.4";
+    VERSION = "b5.0";
     BITS_64 =
         ImmutableTable.<OS, Boolean, String>builder()
             .put(
