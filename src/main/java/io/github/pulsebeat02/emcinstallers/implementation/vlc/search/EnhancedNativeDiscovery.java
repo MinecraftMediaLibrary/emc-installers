@@ -98,7 +98,8 @@ public class EnhancedNativeDiscovery {
 
   private boolean tryLoadingLibrary() {
     try {
-      final libvlc_instance_t instance = libvlc_new(0, new StringArray(new String[0]));
+      final String[] arguments = {"--reset-plugins-cache"};
+      final libvlc_instance_t instance = libvlc_new(0, new StringArray(arguments));
       if (this.attemptNativeLibraryRelease(instance)) {
         return true;
       }
