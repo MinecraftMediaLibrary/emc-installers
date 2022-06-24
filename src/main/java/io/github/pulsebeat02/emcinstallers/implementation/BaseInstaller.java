@@ -63,7 +63,7 @@ public abstract class BaseInstaller implements Installer {
     this.bits64 = bits64;
     this.url = this.getDownloadUrl();
     if (this.url == null) {
-      throw new AssertionError("");
+      throw new AssertionError("Your current operating system is not supported!");
     }
     this.createFiles();
   }
