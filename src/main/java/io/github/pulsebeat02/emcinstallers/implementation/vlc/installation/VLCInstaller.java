@@ -44,7 +44,7 @@ public final class VLCInstaller extends BaseInstaller {
   private static final Table<OS, Boolean, String> BITS_32;
 
   static {
-    VERSION = "3.0.16";
+    VERSION = "3.0.17.4";
     BITS_64 = ImmutableTable.<OS, Boolean, String>builder()
         .put(MAC, true,
             String.format("https://mirror.csclub.uwaterloo.ca/vlc/vlc/%s/macosx/vlc-%s-arm64.dmg",
