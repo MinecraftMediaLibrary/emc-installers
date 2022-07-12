@@ -33,6 +33,8 @@ import io.github.pulsebeat02.emcinstallers.OS;
 import io.github.pulsebeat02.emcinstallers.implementation.BaseInstaller;
 import io.github.pulsebeat02.emcinstallers.implementation.vlc.installation.platform.osx.OSXInstallationStrategy;
 import io.github.pulsebeat02.emcinstallers.implementation.vlc.installation.platform.win.WinInstallationStrategy;
+import io.github.pulsebeat02.emcinstallers.utils.ResourceUtils;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -45,23 +47,8 @@ public final class VLCInstaller extends BaseInstaller {
 
   static {
     VERSION = "3.0.17.4";
-    BITS_64 = ImmutableTable.<OS, Boolean, String>builder()
-        .put(MAC, true,
-            String.format("https://mirror.csclub.uwaterloo.ca/vlc/vlc/%s/macosx/vlc-%s-arm64.dmg",
-                VERSION, VERSION))
-        .put(MAC, false,
-            String.format(
-                "https://mirror.csclub.uwaterloo.ca/vlc/vlc/%s/macosx/vlc-%s-universal.dmg",
-                VERSION, VERSION))
-        .put(WINDOWS, false,
-            String.format("https://mirror.csclub.uwaterloo.ca/vlc/vlc/%s/win64/vlc-%s-win64.zip",
-                VERSION, VERSION))
-        .build();
-    BITS_32 = ImmutableTable.<OS, Boolean, String>builder()
-        .put(WINDOWS, false,
-            String.format("https://mirror.csclub.uwaterloo.ca/vlc/vlc/%s/win32/vlc-%s-win32.zip",
-                VERSION, VERSION))
-        .build();
+    BITS_64 = ResourceUtils.parseTable("/emcinstallers-json/vlc/bits64.json");
+    BITS_32 = ResourceUtils.parseTable("/emcinstallers-json/vlc/bits32.json");
   }
 
   VLCInstaller(final Path folder) {

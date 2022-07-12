@@ -13,16 +13,17 @@ repositories {
 }
 
 dependencies {
-    compileOnlyApi("com.google.guava:guava:31.1-jre")
-    testRuntimeOnly("com.google.guava:guava:31.1-jre")
-    compileOnlyApi("uk.co.caprica:vlcj:4.7.3")
-    testRuntimeOnly("uk.co.caprica:vlcj:4.7.3")
-    compileOnlyApi("uk.co.caprica:vlcj-natives:4.7.0")
-    testRuntimeOnly("uk.co.caprica:vlcj-natives:4.7.0")
-    compileOnlyApi("net.java.dev.jna:jna:5.12.1")
-    testRuntimeOnly("net.java.dev.jna:jna:5.12.1")
-    compileOnlyApi("net.java.dev.jna:jna-platform:5.12.1")
-    testRuntimeOnly("net.java.dev.jna:jna-platform:5.12.1")
+    setOf(
+        "com.google.guava:guava:31.1-jre",
+        "uk.co.caprica:vlcj:4.7.3",
+        "uk.co.caprica:vlcj-natives:4.7.0",
+        "net.java.dev.jna:jna:5.12.1",
+        "net.java.dev.jna:jna-platform:5.12.1",
+        "com.google.code.gson:gson:2.9.0"
+    ).forEach {
+        compileOnlyApi(it)
+        testRuntimeOnly(it)
+    }
 }
 
 sourceSets {
@@ -37,6 +38,9 @@ sourceSets {
 }
 
 tasks {
+    processResources {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
     java {
         toolchain {
             languageVersion.set(JavaLanguageVersion.of(17))

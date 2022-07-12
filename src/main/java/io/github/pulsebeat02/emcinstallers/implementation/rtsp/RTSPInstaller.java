@@ -24,6 +24,8 @@ import com.google.common.collect.ImmutableTable;
 import com.google.common.collect.Table;
 import io.github.pulsebeat02.emcinstallers.OS;
 import io.github.pulsebeat02.emcinstallers.implementation.BaseInstaller;
+import io.github.pulsebeat02.emcinstallers.utils.ResourceUtils;
+
 import java.nio.file.Path;
 
 /** RTSP installer class. */
@@ -33,48 +35,8 @@ public final class RTSPInstaller extends BaseInstaller {
   private static final Table<OS, Boolean, String> BITS_32;
 
   static {
-    BITS_64 =
-        ImmutableTable.<OS, Boolean, String>builder()
-            .put(
-                OS.LINUX,
-                true,
-                "https://github.com/MinecraftMediaLibrary/rtsmp-binaries/raw/main/executables/linux-arm64")
-            .put(
-                OS.LINUX,
-                false,
-                "https://github.com/MinecraftMediaLibrary/rtsmp-binaries/raw/main/executables/linux-amd64")
-            .put(
-                OS.MAC,
-                true,
-                "https://github.com/MinecraftMediaLibrary/rtsmp-binaries/raw/main/executables/darwin-arm64")
-            .put(
-                OS.MAC,
-                false,
-                "https://github.com/MinecraftMediaLibrary/rtsmp-binaries/raw/main/executables/darwin-amd64")
-            .put(
-                OS.WINDOWS,
-                false,
-                "https://github.com/MinecraftMediaLibrary/rtsmp-binaries/raw/main/executables/windows-amd64.exe")
-            .put(
-                OS.FREEBSD,
-                false,
-                "https://github.com/MinecraftMediaLibrary/rtsmp-binaries/raw/main/executables/freebsd-amd64")
-            .build();
-    BITS_32 =
-        ImmutableTable.<OS, Boolean, String>builder()
-            .put(
-                OS.LINUX,
-                true,
-                "https://github.com/MinecraftMediaLibrary/rtsmp-binaries/raw/main/executables/linux-arm")
-            .put(
-                OS.LINUX,
-                false,
-                "https://github.com/MinecraftMediaLibrary/rtsmp-binaries/raw/main/executables/linux-ia32")
-            .put(
-                OS.WINDOWS,
-                false,
-                "https://github.com/MinecraftMediaLibrary/rtsmp-binaries/raw/main/executables/windows-ia32.exe")
-            .build();
+    BITS_64 = ResourceUtils.parseTable("/emcinstallers-json/rtsp/bits64.json");
+    BITS_32 = ResourceUtils.parseTable("/emcinstallers-json/rtsp/bits32.json");
   }
 
   RTSPInstaller(final Path folder) {

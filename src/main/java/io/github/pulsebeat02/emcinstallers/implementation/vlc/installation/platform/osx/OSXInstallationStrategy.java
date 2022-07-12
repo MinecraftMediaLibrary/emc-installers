@@ -45,13 +45,17 @@ public final class OSXInstallationStrategy extends ManualInstallationStrategy {
     final String vlc = "VLC.app";
     final Path dmg = this.getInstaller().getPath();
     final Path disk = Paths.get("/Volumes/VLC media player");
-    final Path app = dmg.getParent().resolve(vlc);
+    final Path app = this.getApplicationFolder().resolve(vlc);
     this.mountDisk(dmg);
     this.copyApplication(disk.resolve(vlc), app);
     this.changePermissions(app);
     this.unmountDisk(disk);
     this.deleteFile(dmg);
     return app.resolve("Contents").resolve("MacOS").resolve("lib");
+  }
+
+  private Path getApplicationFolder() {
+    return Paths.get("/Applications");
   }
 
   private void unmountDisk(final Path disk) throws IOException {

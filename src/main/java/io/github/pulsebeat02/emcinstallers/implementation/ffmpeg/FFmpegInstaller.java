@@ -20,81 +20,21 @@
  */
 package io.github.pulsebeat02.emcinstallers.implementation.ffmpeg;
 
-import com.google.common.collect.ImmutableTable;
 import com.google.common.collect.Table;
 import io.github.pulsebeat02.emcinstallers.OS;
 import io.github.pulsebeat02.emcinstallers.implementation.BaseInstaller;
+import io.github.pulsebeat02.emcinstallers.utils.ResourceUtils;
+
 import java.nio.file.Path;
 
 /** FFmpeg installer class. */
 public final class FFmpegInstaller extends BaseInstaller {
-
-  public static final String VERSION;
   private static final Table<OS, Boolean, String> BITS_64;
   private static final Table<OS, Boolean, String> BITS_32;
 
   static {
-    VERSION = "b5.0.1";
-    BITS_64 =
-        ImmutableTable.<OS, Boolean, String>builder()
-            .put(
-                OS.LINUX,
-                true,
-                String.format(
-                    "https://github.com/eugeneware/ffmpeg-static/releases/download/%s/linux-arm64",
-                    VERSION))
-            .put(
-                OS.LINUX,
-                false,
-                String.format(
-                    "https://github.com/eugeneware/ffmpeg-static/releases/download/%s/linux-x64",
-                    VERSION))
-            .put(
-                OS.MAC,
-                true,
-                String.format(
-                    "https://github.com/eugeneware/ffmpeg-static/releases/download/%s/darwin-arm64",
-                    VERSION))
-            .put(
-                OS.MAC,
-                false,
-                String.format(
-                    "https://github.com/eugeneware/ffmpeg-static/releases/download/%s/darwin-x64",
-                    VERSION))
-            .put(
-                OS.WINDOWS,
-                false,
-                String.format(
-                    "https://github.com/eugeneware/ffmpeg-static/releases/download/%s/win32-x64",
-                    VERSION))
-            .put(
-                OS.FREEBSD,
-                false,
-                String.format(
-                    "https://github.com/eugeneware/ffmpeg-static/releases/download/%s/freebsd-x64",
-                    VERSION))
-            .build();
-    BITS_32 =
-        ImmutableTable.<OS, Boolean, String>builder()
-            .put(
-                OS.LINUX,
-                true,
-                String.format(
-                    "https://github.com/eugeneware/ffmpeg-static/releases/download/%s/linux-arm",
-                    VERSION))
-            .put(
-                OS.LINUX,
-                false,
-                String.format(
-                    "https://github.com/eugeneware/ffmpeg-static/releases/download/%s/linux-ia32",
-                    VERSION))
-            .put(
-                OS.WINDOWS,
-                false,
-                String.format(
-                    "https://github.com/eugeneware/ffmpeg-static/releases/download/%s/win32-ia32",
-                    VERSION))
-            .build();
+    BITS_64 = ResourceUtils.parseTable("/emcinstallers-json/ffmpeg/bits64.json");
+    BITS_32 = ResourceUtils.parseTable("/emcinstallers-json/ffmpeg/bits32.json");
   }
 
   FFmpegInstaller(final Path folder) {
