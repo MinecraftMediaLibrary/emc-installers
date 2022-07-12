@@ -135,13 +135,8 @@ public abstract class BaseInstaller implements Installer {
     }
   }
 
-  private boolean checkExistingFile() throws IOException {
-    if (Files.exists(this.path)) {
-      return true;
-    } else {
-      Files.createFile(this.path);
-    }
-    return false;
+  private boolean checkExistingFile() {
+    return Files.exists(this.path);
   }
 
   private void renameFile() throws IOException {
