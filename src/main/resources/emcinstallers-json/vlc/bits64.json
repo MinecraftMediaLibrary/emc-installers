@@ -1,1 +1,9 @@
-{"MAC":{"true":"https://mirror.csclub.uwaterloo.ca/vlc/vlc/3.0.17.4/macosx/vlc-3.0.17.3-arm64.dmg","false":"https://mirror.csclub.uwaterloo.ca/vlc/vlc/3.0.17.4/macosx/vlc-3.0.17.3-universal.dmg"},"WINDOWS":{"false":"https://mirror.csclub.uwaterloo.ca/vlc/vlc/3.0.17.4/win64/vlc-3.0.17.3-win64.zip"}}
+{
+  "MAC": {
+    "true": "https://mirror.csclub.uwaterloo.ca/vlc/vlc/3.0.17.4/macosx/vlc-3.0.17.3-arm64.dmg",
+    "false": "https://mirror.csclub.uwaterloo.ca/vlc/vlc/3.0.17.4/macosx/vlc-3.0.17.3-universal.dmg"
+  },
+  "WINDOWS": {
+    "false": "https://mirror.csclub.uwaterloo.ca/vlc/vlc/3.0.17.4/win64/vlc-3.0.17.3-win64.zip"
+  }
+}
