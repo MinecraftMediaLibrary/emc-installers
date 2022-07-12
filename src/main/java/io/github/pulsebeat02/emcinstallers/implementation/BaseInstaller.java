@@ -129,7 +129,8 @@ public abstract class BaseInstaller implements Installer {
   private void downloadFile() throws IOException {
     try (final ReadableByteChannel readableByteChannel =
             Channels.newChannel(new URL(this.url).openStream());
-        final FileChannel channel = new FileOutputStream(this.path.toFile()).getChannel()) {
+        final FileOutputStream stream = new FileOutputStream(this.path.toFile());
+        final FileChannel channel = stream.getChannel()) {
       channel.transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
     }
   }
