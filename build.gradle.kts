@@ -16,7 +16,7 @@ dependencies {
     setOf(
         "com.google.guava:guava:31.1-jre",
         "uk.co.caprica:vlcj:4.7.3",
-        "uk.co.caprica:vlcj-natives:4.7.0",
+        "uk.co.caprica:vlcj-natives:4.8.1",
         "net.java.dev.jna:jna:5.12.1",
         "net.java.dev.jna:jna-platform:5.12.1",
         "com.google.code.gson:gson:2.9.0"
