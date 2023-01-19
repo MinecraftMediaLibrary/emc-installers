@@ -46,7 +46,7 @@ public final class VLCInstaller extends BaseInstaller {
   private static final Table<OS, Boolean, String> BITS_32;
 
   static {
-    VERSION = "3.0.17.4";
+    VERSION = "3.0.18";
     BITS_64 = ResourceUtils.parseTable("/emcinstallers-json/vlc/bits64.json");
     BITS_32 = ResourceUtils.parseTable("/emcinstallers-json/vlc/bits32.json");
   }
