@@ -24,7 +24,7 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 import com.sun.jna.platform.win32.Advapi32Util;
 import io.github.pulsebeat02.emcinstallers.implementation.vlc.search.provider.DiscoveryDirectoryProvider;
 import io.github.pulsebeat02.emcinstallers.implementation.vlc.search.provider.DiscoveryProviderPriority;
-import uk.co.caprica.vlcj.binding.RuntimeUtil;
+import uk.co.caprica.vlcj.binding.support.runtime.RuntimeUtil;
 
 public class WindowsInstallDirectoryProvider implements DiscoveryDirectoryProvider {
 

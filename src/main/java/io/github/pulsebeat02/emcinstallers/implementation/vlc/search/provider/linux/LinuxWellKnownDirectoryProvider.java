@@ -20,7 +20,7 @@
 package io.github.pulsebeat02.emcinstallers.implementation.vlc.search.provider.linux;
 
 import io.github.pulsebeat02.emcinstallers.implementation.vlc.search.provider.WellKnownDirectoryProvider;
-import uk.co.caprica.vlcj.binding.RuntimeUtil;
+import uk.co.caprica.vlcj.binding.support.runtime.RuntimeUtil;
 
 public class LinuxWellKnownDirectoryProvider extends WellKnownDirectoryProvider {
 

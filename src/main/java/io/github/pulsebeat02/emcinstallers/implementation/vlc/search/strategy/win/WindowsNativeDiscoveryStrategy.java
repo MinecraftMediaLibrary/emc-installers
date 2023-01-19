@@ -20,8 +20,8 @@
 package io.github.pulsebeat02.emcinstallers.implementation.vlc.search.strategy.win;
 
 import io.github.pulsebeat02.emcinstallers.implementation.vlc.search.provider.DirectoryProviderDiscoveryStrategy;
-import uk.co.caprica.vlcj.binding.LibC;
-import uk.co.caprica.vlcj.binding.RuntimeUtil;
+import uk.co.caprica.vlcj.binding.lib.LibC;
+import uk.co.caprica.vlcj.binding.support.runtime.RuntimeUtil;
 
 public class WindowsNativeDiscoveryStrategy extends DirectoryProviderDiscoveryStrategy {
 
