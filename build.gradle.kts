@@ -19,7 +19,7 @@ dependencies {
         "uk.co.caprica:vlcj-natives:4.8.1",
         "net.java.dev.jna:jna:5.12.1",
         "net.java.dev.jna:jna-platform:5.12.1",
-        "com.google.code.gson:gson:2.10"
+        "com.google.code.gson:gson:2.10.1"
     ).forEach {
         compileOnlyApi(it)
         testRuntimeOnly(it)
