@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     setOf(
-        "com.google.guava:guava:31.1-jre",
+        "com.google.guava:guava:33.0.0-jre",
         "uk.co.caprica:vlcj:4.8.2",
         "uk.co.caprica:vlcj-natives:4.8.1",
         "net.java.dev.jna:jna:5.13.0",
